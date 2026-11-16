@@ -1,0 +1,127 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  UV_FROZEN: "1"
+  FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.cache/fastembed
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync
+      # DB-backed tests skip themselves here; they run in eval-gate where Postgres exists.
+      - run: uv run pytest -q
+
+  eval-gate:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: rag
+          POSTGRES_PASSWORD: rag
+          POSTGRES_DB: rag
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U rag -d rag"
+          --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql://rag:rag@localhost:5433/rag
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Cache ONNX models (embedder + reranker)
+        uses: actions/cache@v4
+        with:
+          path: .cache/fastembed
+          key: fastembed-${{ hashFiles('config/settings.toml') }}
+      - run: uv sync
+      - name: DB integration tests
+        run: uv run pytest -q -m db
+      - name: Ingest vendored fixture corpus
+        run: uv run docs-rag ingest --corpus fixture
+      - name: Retrieval evals + regression gate
+        run: uv run docs-rag eval-retrieval --corpus fixture
+      - name: Upload eval report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-eval-fixture
+          path: results/retrieval_fixture.*
+          if-no-files-found: ignore
+
+  answer-evals:
+    # Costs money: only on main / manual runs, and only if the secret is configured.
+    if: github.event_name != 'pull_request'
+    needs: eval-gate
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg17
+        env:
+          POSTGRES_USER: rag
+          POSTGRES_PASSWORD: rag
+          POSTGRES_DB: rag
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U rag -d rag"
+          --health-interval 2s --health-timeout 3s --health-retries 30
+    env:
+      DATABASE_URL: postgresql://rag:rag@localhost:5433/rag
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - name: Skip notice
+        if: env.ANTHROPIC_API_KEY == ''
+        run: echo "ANTHROPIC_API_KEY secret not set; answer evals skipped."
+      - uses: actions/checkout@v4
+        if: env.ANTHROPIC_API_KEY != ''
+      - uses: astral-sh/setup-uv@v6
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          enable-cache: true
+      - uses: actions/cache@v4
+        if: env.ANTHROPIC_API_KEY != ''
+        with:
+          path: .cache/fastembed
+          key: fastembed-${{ hashFiles('config/settings.toml') }}
+      - if: env.ANTHROPIC_API_KEY != ''
+        run: |
+          uv sync
+          uv run docs-rag ingest --corpus fixture
+          uv run docs-rag eval-answers --corpus fixture
+      - if: env.ANTHROPIC_API_KEY != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: answer-eval-fixture
+          path: results/answers_fixture.*
