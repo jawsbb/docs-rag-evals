@@ -1,0 +1,56 @@
+[project]
+name = "docs-rag-evals"
+version = "0.1.0"
+description = "RAG over the Supabase docs with Postgres + pgvector, measured with a retrieval eval harness and exposed as an MCP tool."
+authors = [{ name = "Jules Koehler" }]
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.40",
+    "fastembed>=0.5",
+    "httpx>=0.27",
+    "mcp>=1.9",
+    "pgvector>=0.3",
+    "psycopg[binary]>=3.2",
+    "pydantic>=2.7",
+]
+
+[project.scripts]
+docs-rag = "docs_rag.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "docs_rag"
+
+[dependency-groups]
+dev = [
+    "mypy>=2.4.1",
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "RUF", "PT"]
+ignore = ["ISC001"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+files = ["src"]
+
+[[tool.mypy.overrides]]
+module = ["fastembed.*", "pgvector.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["db: needs a running Postgres with pgvector (DATABASE_URL)"]
