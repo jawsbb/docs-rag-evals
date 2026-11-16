@@ -1,0 +1,39 @@
+{
+  "corpus": "full",
+  "main_variant": "vector",
+  "n_answerable": 64,
+  "variants": {
+    "fts": {
+      "recall@1": 0.2734,
+      "recall@3": 0.4531,
+      "recall@5": 0.5781,
+      "recall@10": 0.6875,
+      "mrr": 0.4204,
+      "ndcg@10": 0.4734
+    },
+    "vector": {
+      "recall@1": 0.7344,
+      "recall@3": 0.875,
+      "recall@5": 0.9219,
+      "recall@10": 0.9609,
+      "mrr": 0.8591,
+      "ndcg@10": 0.8723
+    },
+    "hybrid": {
+      "recall@1": 0.4766,
+      "recall@3": 0.6562,
+      "recall@5": 0.8125,
+      "recall@10": 0.9375,
+      "mrr": 0.6458,
+      "ndcg@10": 0.7005
+    },
+    "hybrid_rerank": {
+      "recall@1": 0.7422,
+      "recall@3": 0.9062,
+      "recall@5": 0.9375,
+      "recall@10": 0.9453,
+      "mrr": 0.8746,
+      "ndcg@10": 0.8779
+    }
+  }
+}
