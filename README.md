@@ -122,9 +122,8 @@ What the numbers say:
 - **Postgres FTS is weak here, even on keyword questions (0.42 recall@5).** `ts_rank_cd` has no
   inverse document frequency. A natural-language question turned into an OR-query ranks chunks
   that repeat common words ("Supabase", "function", "storage") above the one chunk that has
-  the rare identifier. As a one-off experiment (not in the repo), I dropped query terms that
-  appear in more than 20% of chunks. FTS MRR on the full corpus went from 0.42 to 0.53. I did
-  not adopt it, because the cutoff would be tuned on the eval set itself.
+  the rare identifier. Dropping very common query terms is an obvious fix, but any cutoff would
+  be tuned on the eval set itself, so it is not part of the shipped variants.
 - **Equal-weight RRF lets that noise in.** Hybrid sits between the two lists it fuses. On 239
   pages it loses 0.21 MRR against vector-only. On the fixture (fewer distractors) the gap is
   smaller, and hybrid even wins recall@5. Fusion only helps when both lists are reasonably good.
