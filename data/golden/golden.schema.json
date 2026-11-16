@@ -1,0 +1,61 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "pattern": "^q\\d{3}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "question": {
+      "minLength": 8,
+      "title": "Question",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "lookup",
+        "how_to",
+        "keyword",
+        "paraphrase",
+        "multi_hop",
+        "unanswerable"
+      ],
+      "title": "Type",
+      "type": "string"
+    },
+    "expected_pages": {
+      "description": "page ids that contain the answer; empty if unanswerable",
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Pages",
+      "type": "array"
+    },
+    "expected_sections": {
+      "description": "headings where the evidence is",
+      "items": {
+        "type": "string"
+      },
+      "title": "Expected Sections",
+      "type": "array"
+    },
+    "reference_answer": {
+      "title": "Reference Answer",
+      "type": "string"
+    },
+    "notes": {
+      "default": "",
+      "title": "Notes",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "question",
+    "type",
+    "expected_pages",
+    "reference_answer"
+  ],
+  "title": "GoldenItem",
+  "type": "object"
+}
