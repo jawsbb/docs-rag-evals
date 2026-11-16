@@ -2,16 +2,16 @@
 
 - Corpus: 239 pages / 1672 chunks, upstream commit `311e2c721c1e`
 - Golden set: 64 answerable questions scored (+6 unanswerable, reported separately)
-- Embeddings: `BAAI/bge-small-en-v1.5`; generated 2026-11-16 13:46 UTC
+- Embeddings: `BAAI/bge-small-en-v1.5`; generated 2026-11-16 14:21 UTC
 
 ## Overall (page level)
 
 | variant | recall@1 | recall@3 | recall@5 | recall@10 | mrr | ndcg@10 | p50 ms | p95 ms |
 |---|---|---|---|---|---|---|---|---|
-| fts | 0.273 | 0.453 | 0.578 | 0.688 | 0.420 | 0.473 | 15.1 | 31.3 |
-| **vector** (gated) | 0.734 | 0.875 | 0.922 | 0.961 | 0.859 | 0.872 | 10.3 | 12.4 |
-| hybrid | 0.477 | 0.656 | 0.812 | 0.938 | 0.646 | 0.701 | 29.1 | 43.8 |
-| hybrid_rerank | 0.742 | 0.906 | 0.938 | 0.945 | 0.875 | 0.878 | 1079.2 | 1167.3 |
+| fts | 0.281 | 0.469 | 0.594 | 0.703 | 0.442 | 0.489 | 15.0 | 30.9 |
+| **vector** (gated) | 0.727 | 0.867 | 0.922 | 0.961 | 0.849 | 0.866 | 10.4 | 11.3 |
+| hybrid | 0.492 | 0.664 | 0.812 | 0.938 | 0.664 | 0.710 | 24.9 | 40.7 |
+| hybrid_rerank | 0.734 | 0.898 | 0.930 | 0.938 | 0.864 | 0.868 | 1020.0 | 1050.1 |
 
 ## recall@5 by question type
 
@@ -20,14 +20,14 @@
 | how_to | 14 | 0.643 | 1.000 | 0.786 | 1.000 |
 | keyword | 12 | 0.417 | 0.833 | 0.833 | 0.833 |
 | lookup | 14 | 0.857 | 1.000 | 1.000 | 1.000 |
-| multi_hop | 9 | 0.444 | 0.889 | 0.667 | 0.889 |
+| multi_hop | 9 | 0.556 | 0.889 | 0.667 | 0.833 |
 | paraphrase | 15 | 0.467 | 0.867 | 0.733 | 0.933 |
 
 ## Unanswerable questions (not gated)
 
 Top-1 cosine similarity of the vector retriever. A usable no-answer threshold needs the unanswerable values to sit clearly below the answerable mean.
 
-- answerable mean: 0.7798
+- answerable mean: 0.7785
 - q065: 0.8527
 - q066: 0.7588
 - q067: 0.7558

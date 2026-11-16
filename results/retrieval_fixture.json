@@ -2,12 +2,12 @@
   "variants": {
     "fts": {
       "overall": {
-        "recall@1": 0.5454545454545454,
-        "recall@3": 0.7272727272727273,
-        "recall@5": 0.8409090909090909,
-        "recall@10": 0.9772727272727273,
-        "mrr": 0.7106782106782107,
-        "ndcg@10": 0.7640873873949
+        "recall@1": 0.5444444444444444,
+        "recall@3": 0.7222222222222222,
+        "recall@5": 0.8444444444444444,
+        "recall@10": 0.9777777777777777,
+        "mrr": 0.7171075837742505,
+        "ndcg@10": 0.7669130088876295
       },
       "by_type": {
         "how_to": {
@@ -38,13 +38,13 @@
           "n": 10
         },
         "multi_hop": {
-          "recall@1": 0.3333333333333333,
-          "recall@3": 0.6666666666666666,
-          "recall@5": 0.8333333333333334,
+          "recall@1": 0.35714285714285715,
+          "recall@3": 0.6428571428571429,
+          "recall@5": 0.8571428571428571,
           "recall@10": 1.0,
-          "mrr": 0.8055555555555555,
-          "ndcg@10": 0.7915787014692057,
-          "n": 6
+          "mrr": 0.8333333333333333,
+          "ndcg@10": 0.8058160804832804,
+          "n": 7
         },
         "paraphrase": {
           "recall@1": 0.5,
@@ -57,18 +57,18 @@
         }
       },
       "latency_ms": {
-        "p50": 2.5,
+        "p50": 2.2,
         "p95": 4.5
       }
     },
     "vector": {
       "overall": {
-        "recall@1": 0.8295454545454546,
-        "recall@3": 0.9772727272727273,
-        "recall@5": 0.9772727272727273,
+        "recall@1": 0.8111111111111111,
+        "recall@3": 0.9777777777777777,
+        "recall@5": 0.9777777777777777,
         "recall@10": 1.0,
-        "mrr": 0.9356060606060606,
-        "ndcg@10": 0.9532368829872652
+        "mrr": 0.9259259259259258,
+        "ndcg@10": 0.947463316779043
       },
       "by_type": {
         "how_to": {
@@ -99,13 +99,13 @@
           "n": 10
         },
         "multi_hop": {
-          "recall@1": 0.4166666666666667,
+          "recall@1": 0.35714285714285715,
           "recall@3": 1.0,
           "recall@5": 1.0,
           "recall@10": 1.0,
-          "mrr": 0.9166666666666666,
-          "ndcg@10": 0.9489044006028785,
-          "n": 6
+          "mrr": 0.8571428571428571,
+          "ndcg@10": 0.9124075438906488,
+          "n": 7
         },
         "paraphrase": {
           "recall@1": 0.8,
@@ -118,18 +118,18 @@
         }
       },
       "latency_ms": {
-        "p50": 6.1,
-        "p95": 6.7
+        "p50": 5.4,
+        "p95": 6.2
       }
     },
     "hybrid": {
       "overall": {
-        "recall@1": 0.6818181818181818,
-        "recall@3": 0.9431818181818182,
+        "recall@1": 0.6666666666666666,
+        "recall@3": 0.9333333333333333,
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 0.8462121212121212,
-        "ndcg@10": 0.8764711832979315
+        "mrr": 0.8385185185185186,
+        "ndcg@10": 0.8708618352247293
       },
       "by_type": {
         "how_to": {
@@ -160,13 +160,13 @@
           "n": 10
         },
         "multi_hop": {
-          "recall@1": 0.5,
-          "recall@3": 0.9166666666666666,
+          "recall@1": 0.42857142857142855,
+          "recall@3": 0.8571428571428571,
           "recall@5": 1.0,
           "recall@10": 1.0,
-          "mrr": 1.0,
-          "ndcg@10": 0.9393962804637687,
-          "n": 6
+          "mrr": 0.9285714285714286,
+          "ndcg@10": 0.89434688611235,
+          "n": 7
         },
         "paraphrase": {
           "recall@1": 0.4,
@@ -179,18 +179,18 @@
         }
       },
       "latency_ms": {
-        "p50": 8.6,
-        "p95": 11.1
+        "p50": 8.2,
+        "p95": 11.0
       }
     },
     "hybrid_rerank": {
       "overall": {
-        "recall@1": 0.9318181818181818,
-        "recall@3": 0.9772727272727273,
+        "recall@1": 0.9111111111111111,
+        "recall@3": 0.9666666666666667,
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 1.0,
-        "ndcg@10": 0.9925943504505519
+        "mrr": 0.9851851851851853,
+        "ndcg@10": 0.9832176253062135
       },
       "by_type": {
         "how_to": {
@@ -221,13 +221,13 @@
           "n": 10
         },
         "multi_hop": {
-          "recall@1": 0.5,
-          "recall@3": 0.8333333333333334,
+          "recall@1": 0.42857142857142855,
+          "recall@3": 0.7857142857142857,
           "recall@5": 1.0,
           "recall@10": 1.0,
-          "mrr": 1.0,
-          "ndcg@10": 0.9456919033040476,
-          "n": 6
+          "mrr": 0.9047619047619048,
+          "ndcg@10": 0.8921133055399437,
+          "n": 7
         },
         "paraphrase": {
           "recall@1": 1.0,
@@ -240,8 +240,8 @@
         }
       },
       "latency_ms": {
-        "p50": 1116.8,
-        "p95": 1189.8
+        "p50": 1009.2,
+        "p95": 1033.7
       }
     }
   },
@@ -691,14 +691,14 @@
         "ranked": [
           "auth/auth-anonymous",
           "auth/rate-limits",
+          "storage/uploads/standard-uploads",
           "storage/uploads/file-limits",
           "functions/limits",
           "auth/sessions",
-          "storage/uploads/standard-uploads",
           "storage/cdn/smart-cdn",
-          "auth/auth-mfa",
           "storage/uploads/resumable-uploads",
-          "auth/redirect-urls"
+          "storage/serving/image-transformations",
+          "storage/security/access-control"
         ],
         "recall@1": 0.5,
         "recall@3": 1.0,
@@ -1169,23 +1169,20 @@
         "id": "q043",
         "type": "multi_hop",
         "ranked": [
-          "database/postgres/row-level-security",
-          "functions/background-tasks",
-          "database/connecting-to-postgres",
-          "database/postgres/timeouts",
-          "database/webhooks",
-          "functions/secrets",
-          "functions/limits",
-          "storage/cdn/smart-cdn",
-          "storage/serving/image-transformations",
-          "auth/sessions"
+          "storage/uploads/standard-uploads",
+          "auth/auth-anonymous",
+          "storage/uploads/file-limits",
+          "storage/uploads/resumable-uploads",
+          "auth/sessions",
+          "storage/security/access-control",
+          "storage/serving/image-transformations"
         ],
         "recall@1": 0.0,
         "recall@3": 0.5,
         "recall@5": 0.5,
         "recall@10": 1.0,
         "mrr": 0.5,
-        "ndcg@10": 0.5912352048230277
+        "ndcg@10": 0.6052602440527057
       },
       {
         "id": "q044",
@@ -1208,6 +1205,28 @@
         "recall@10": 1.0,
         "mrr": 1.0,
         "ndcg@10": 0.8503449055347546
+      },
+      {
+        "id": "q063",
+        "type": "multi_hop",
+        "ranked": [
+          "storage/uploads/file-limits",
+          "storage/uploads/resumable-uploads",
+          "storage/uploads/standard-uploads",
+          "storage/serving/image-transformations",
+          "storage/security/access-control",
+          "database/connecting-to-postgres",
+          "functions/cors",
+          "auth/sessions",
+          "functions/limits",
+          "storage/cdn/smart-cdn"
+        ],
+        "recall@1": 0.5,
+        "recall@3": 0.5,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 0.8772153153380493
       }
     ],
     "vector": [
@@ -1657,14 +1676,14 @@
         "ranked": [
           "auth/rate-limits",
           "auth/auth-anonymous",
-          "auth/auth-mfa",
-          "functions/limits",
-          "auth/sessions",
-          "storage/serving/image-transformations",
+          "storage/cdn/smart-cdn",
           "auth/password-security",
-          "database/connecting-to-postgres",
+          "auth/auth-mfa",
+          "auth/sessions",
+          "storage/uploads/standard-uploads",
           "storage/uploads/file-limits",
-          "storage/cdn/smart-cdn"
+          "functions/limits",
+          "storage/serving/image-transformations"
         ],
         "recall@1": 0.5,
         "recall@3": 1.0,
@@ -2136,23 +2155,23 @@
         "id": "q043",
         "type": "multi_hop",
         "ranked": [
-          "functions/background-tasks",
-          "functions/limits",
-          "functions/schedule-functions",
-          "auth/rate-limits",
-          "database/webhooks",
-          "auth/sessions",
+          "storage/uploads/resumable-uploads",
+          "auth/auth-anonymous",
+          "storage/security/access-control",
+          "storage/uploads/standard-uploads",
+          "storage/uploads/file-limits",
+          "storage/serving/image-transformations",
+          "auth/auth-mfa",
+          "database/vault",
           "storage/cdn/smart-cdn",
-          "database/postgres/timeouts",
-          "functions/cors",
-          "functions/regional-invocation"
+          "auth/sessions"
         ],
-        "recall@1": 0.5,
+        "recall@1": 0.0,
         "recall@3": 1.0,
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 1.0,
-        "ndcg@10": 1.0
+        "mrr": 0.5,
+        "ndcg@10": 0.6934264036172708
       },
       {
         "id": "q044",
@@ -2168,6 +2187,28 @@
           "functions/limits",
           "auth/auth-mfa",
           "storage/security/access-control"
+        ],
+        "recall@1": 0.5,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
+      },
+      {
+        "id": "q063",
+        "type": "multi_hop",
+        "ranked": [
+          "storage/serving/image-transformations",
+          "storage/uploads/file-limits",
+          "storage/uploads/resumable-uploads",
+          "storage/security/access-control",
+          "storage/uploads/standard-uploads",
+          "storage/cdn/smart-cdn",
+          "auth/rate-limits",
+          "database/postgres/row-level-security",
+          "auth/sessions",
+          "functions/limits"
         ],
         "recall@1": 0.5,
         "recall@3": 1.0,
@@ -2620,14 +2661,14 @@
         "ranked": [
           "auth/auth-anonymous",
           "auth/rate-limits",
+          "storage/cdn/smart-cdn",
+          "storage/uploads/standard-uploads",
+          "storage/uploads/file-limits",
           "functions/limits",
           "auth/sessions",
           "auth/auth-mfa",
-          "storage/uploads/file-limits",
           "storage/serving/image-transformations",
-          "storage/cdn/smart-cdn",
-          "storage/uploads/standard-uploads",
-          "auth/password-security"
+          "storage/security/access-control"
         ],
         "recall@1": 0.5,
         "recall@3": 1.0,
@@ -3100,23 +3141,23 @@
         "id": "q043",
         "type": "multi_hop",
         "ranked": [
-          "functions/background-tasks",
-          "functions/limits",
-          "database/postgres/timeouts",
-          "database/webhooks",
-          "database/postgres/row-level-security",
+          "storage/uploads/standard-uploads",
+          "auth/auth-anonymous",
+          "storage/uploads/resumable-uploads",
+          "storage/uploads/file-limits",
+          "storage/security/access-control",
+          "storage/serving/image-transformations",
           "auth/sessions",
-          "storage/cdn/smart-cdn",
-          "functions/secrets",
-          "database/connecting-to-postgres",
-          "functions/schedule-functions"
+          "auth/auth-mfa",
+          "database/vault",
+          "storage/cdn/smart-cdn"
         ],
-        "recall@1": 0.5,
-        "recall@3": 1.0,
+        "recall@1": 0.0,
+        "recall@3": 0.5,
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 1.0,
-        "ndcg@10": 1.0
+        "mrr": 0.5,
+        "ndcg@10": 0.6240505200038379
       },
       {
         "id": "q044",
@@ -3139,6 +3180,28 @@
         "recall@10": 1.0,
         "mrr": 1.0,
         "ndcg@10": 0.9197207891481876
+      },
+      {
+        "id": "q063",
+        "type": "multi_hop",
+        "ranked": [
+          "storage/uploads/file-limits",
+          "storage/serving/image-transformations",
+          "storage/uploads/resumable-uploads",
+          "storage/uploads/standard-uploads",
+          "storage/security/access-control",
+          "auth/sessions",
+          "storage/cdn/smart-cdn",
+          "database/connecting-to-postgres",
+          "functions/cors",
+          "auth/rate-limits"
+        ],
+        "recall@1": 0.5,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
       }
     ],
     "hybrid_rerank": [
@@ -3584,14 +3647,14 @@
         "ranked": [
           "auth/rate-limits",
           "auth/auth-anonymous",
-          "auth/sessions",
-          "functions/limits",
-          "storage/serving/image-transformations",
-          "storage/uploads/file-limits",
-          "auth/auth-mfa",
           "storage/cdn/smart-cdn",
           "storage/uploads/standard-uploads",
-          "auth/password-security"
+          "storage/uploads/file-limits",
+          "storage/serving/image-transformations",
+          "auth/sessions",
+          "auth/auth-mfa",
+          "functions/limits",
+          "storage/security/access-control"
         ],
         "recall@1": 0.5,
         "recall@3": 1.0,
@@ -4064,23 +4127,23 @@
         "id": "q043",
         "type": "multi_hop",
         "ranked": [
-          "functions/background-tasks",
-          "functions/limits",
+          "storage/uploads/standard-uploads",
+          "storage/uploads/resumable-uploads",
+          "auth/auth-anonymous",
+          "storage/security/access-control",
+          "storage/uploads/file-limits",
+          "storage/serving/image-transformations",
           "auth/sessions",
-          "storage/cdn/smart-cdn",
-          "database/postgres/timeouts",
-          "functions/schedule-functions",
-          "database/webhooks",
-          "database/connecting-to-postgres",
-          "database/postgres/row-level-security",
-          "auth/rate-limits"
+          "auth/auth-mfa",
+          "database/vault",
+          "storage/cdn/smart-cdn"
         ],
-        "recall@1": 0.5,
-        "recall@3": 1.0,
+        "recall@1": 0.0,
+        "recall@3": 0.5,
         "recall@5": 1.0,
         "recall@10": 1.0,
-        "mrr": 1.0,
-        "ndcg@10": 1.0
+        "mrr": 0.3333333333333333,
+        "ndcg@10": 0.5706417189553201
       },
       {
         "id": "q044",
@@ -4103,11 +4166,33 @@
         "recall@10": 1.0,
         "mrr": 1.0,
         "ndcg@10": 1.0
+      },
+      {
+        "id": "q063",
+        "type": "multi_hop",
+        "ranked": [
+          "storage/uploads/file-limits",
+          "storage/serving/image-transformations",
+          "storage/uploads/resumable-uploads",
+          "storage/uploads/standard-uploads",
+          "storage/security/access-control",
+          "auth/sessions",
+          "storage/cdn/smart-cdn",
+          "database/connecting-to-postgres",
+          "functions/cors",
+          "auth/rate-limits"
+        ],
+        "recall@1": 0.5,
+        "recall@3": 1.0,
+        "recall@5": 1.0,
+        "recall@10": 1.0,
+        "mrr": 1.0,
+        "ndcg@10": 1.0
       }
     ]
   },
   "no_answer_signal": {
-    "vector_top1_similarity_answerable_mean": 0.7652,
+    "vector_top1_similarity_answerable_mean": 0.7634,
     "vector_top1_similarity_unanswerable": {
       "q065": 0.6685,
       "q066": 0.7129,
@@ -4117,12 +4202,12 @@
       "q070": 0.7787
     }
   },
-  "n_answerable": 44,
+  "n_answerable": 45,
   "n_unanswerable": 6,
   "corpus": "fixture",
   "corpus_sha": "311e2c721c1e3dc613cb5161f101eaf68ebe5b27",
   "embedding_model": "BAAI/bge-small-en-v1.5",
   "pages": 24,
   "chunks": 197,
-  "generated_at": "2026-11-16 13:48 UTC"
+  "generated_at": "2026-11-16 14:20 UTC"
 }

@@ -4,36 +4,36 @@
   "n_answerable": 64,
   "variants": {
     "fts": {
-      "recall@1": 0.2734,
-      "recall@3": 0.4531,
-      "recall@5": 0.5781,
-      "recall@10": 0.6875,
-      "mrr": 0.4204,
-      "ndcg@10": 0.4734
+      "recall@1": 0.2812,
+      "recall@3": 0.4688,
+      "recall@5": 0.5938,
+      "recall@10": 0.7031,
+      "mrr": 0.4419,
+      "ndcg@10": 0.4894
     },
     "vector": {
-      "recall@1": 0.7344,
-      "recall@3": 0.875,
+      "recall@1": 0.7266,
+      "recall@3": 0.8672,
       "recall@5": 0.9219,
       "recall@10": 0.9609,
-      "mrr": 0.8591,
-      "ndcg@10": 0.8723
+      "mrr": 0.8487,
+      "ndcg@10": 0.8665
     },
     "hybrid": {
-      "recall@1": 0.4766,
-      "recall@3": 0.6562,
+      "recall@1": 0.4922,
+      "recall@3": 0.6641,
       "recall@5": 0.8125,
       "recall@10": 0.9375,
-      "mrr": 0.6458,
-      "ndcg@10": 0.7005
+      "mrr": 0.664,
+      "ndcg@10": 0.7095
     },
     "hybrid_rerank": {
-      "recall@1": 0.7422,
-      "recall@3": 0.9062,
-      "recall@5": 0.9375,
-      "recall@10": 0.9453,
-      "mrr": 0.8746,
-      "ndcg@10": 0.8779
+      "recall@1": 0.7344,
+      "recall@3": 0.8984,
+      "recall@5": 0.9297,
+      "recall@10": 0.9375,
+      "mrr": 0.8642,
+      "ndcg@10": 0.8683
     }
   }
 }

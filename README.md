@@ -93,19 +93,19 @@ question only gets full recall when both of its pages are retrieved.
 
 | variant | recall@1 | recall@3 | recall@5 | recall@10 | MRR | nDCG@10 | p50 latency |
 |---|---|---|---|---|---|---|---|
-| fts | 0.273 | 0.453 | 0.578 | 0.688 | 0.420 | 0.473 | 15 ms |
-| **vector** (shipped, gated) | 0.734 | 0.875 | 0.922 | 0.961 | 0.859 | 0.872 | 10 ms |
-| hybrid (RRF) | 0.477 | 0.656 | 0.812 | 0.938 | 0.646 | 0.701 | 29 ms |
-| hybrid_rerank | 0.742 | 0.906 | 0.938 | 0.945 | 0.875 | 0.878 | 1,079 ms |
+| fts | 0.281 | 0.469 | 0.594 | 0.703 | 0.442 | 0.489 | 15 ms |
+| **vector** (shipped, gated) | 0.727 | 0.867 | 0.922 | 0.961 | 0.849 | 0.866 | 10 ms |
+| hybrid (RRF) | 0.492 | 0.664 | 0.812 | 0.938 | 0.664 | 0.710 | 25 ms |
+| hybrid_rerank | 0.734 | 0.898 | 0.930 | 0.938 | 0.864 | 0.868 | 1,020 ms |
 
-**Fixture**: 24 pages, 197 chunks, 44 answerable questions. This is what CI runs.
+**Fixture**: 24 pages, 197 chunks, 45 answerable questions. This is what CI runs.
 
 | variant | recall@1 | recall@3 | recall@5 | recall@10 | MRR | nDCG@10 | p50 latency |
 |---|---|---|---|---|---|---|---|
-| fts | 0.545 | 0.727 | 0.841 | 0.977 | 0.711 | 0.764 | 3 ms |
-| **vector** (shipped, gated) | 0.830 | 0.977 | 0.977 | 1.000 | 0.936 | 0.953 | 6 ms |
-| hybrid (RRF) | 0.682 | 0.943 | 1.000 | 1.000 | 0.846 | 0.876 | 9 ms |
-| hybrid_rerank | 0.932 | 0.977 | 1.000 | 1.000 | 1.000 | 0.993 | 1,117 ms |
+| fts | 0.544 | 0.722 | 0.844 | 0.978 | 0.717 | 0.767 | 2 ms |
+| **vector** (shipped, gated) | 0.811 | 0.978 | 0.978 | 1.000 | 0.926 | 0.947 | 5 ms |
+| hybrid (RRF) | 0.667 | 0.933 | 1.000 | 1.000 | 0.839 | 0.871 | 8 ms |
+| hybrid_rerank | 0.911 | 0.967 | 1.000 | 1.000 | 0.985 | 0.983 | 1,009 ms |
 
 Recall@5 by question type on the full corpus:
 
@@ -115,7 +115,7 @@ Recall@5 by question type on the full corpus:
 | how_to | 14 | 0.643 | 1.000 | 0.786 | 1.000 |
 | keyword | 12 | 0.417 | 0.833 | 0.833 | 0.833 |
 | paraphrase | 15 | 0.467 | 0.867 | 0.733 | 0.933 |
-| multi_hop | 9 | 0.444 | 0.889 | 0.667 | 0.889 |
+| multi_hop | 9 | 0.556 | 0.889 | 0.667 | 0.833 |
 
 What the numbers say:
 
@@ -125,17 +125,17 @@ What the numbers say:
   the rare identifier. Dropping very common query terms is an obvious fix, but any cutoff would
   be tuned on the eval set itself, so it is not part of the shipped variants.
 - **Equal-weight RRF lets that noise in.** Hybrid sits between the two lists it fuses. On 239
-  pages it loses 0.21 MRR against vector-only. On the fixture (fewer distractors) the gap is
+  pages it loses 0.19 MRR against vector-only. On the fixture (fewer distractors) the gap is
   smaller, and hybrid even wins recall@5. Fusion only helps when both lists are reasonably good.
 - **A cross-encoder recovers the ranking but costs about 100x the latency on CPU.** It is the
-  best variant on recall@1/MRR, but the gain over vector-only on the full corpus (+0.016 MRR,
+  best variant on recall@1/MRR, but the gain over vector-only on the full corpus (+0.015 MRR,
   about 1 question in 64) is within noise. It is available as `mode="hybrid_rerank"`, not the
   default.
 - **No-answer detection by score threshold does not work.** For the 6 unanswerable questions,
   the top-1 cosine similarity is 0.71–0.85. The mean for answerable questions is 0.78. Saying
   "I don't know" has to happen at generation time (the answer evals check for it), not by
   thresholding retrieval.
-- Sample sizes are small (64 and 44 questions). Treat differences under about 0.03–0.05 as noise.
+- Sample sizes are small (64 and 45 questions). Treat differences under about 0.03–0.05 as noise.
 
 Answer evals: implemented and unit-tested with a mocked client, **but not run**. No API key was
 used to build this repo, so there are no answer-quality numbers here.
@@ -153,13 +153,13 @@ variants, writes `results/retrieval_fixture.{md,json}`, and exits non-zero if:
 3. the number of evaluable questions differs from the baseline. A changed golden set or
    corpus needs a deliberate `make baseline`, committed and visible in review.
 
-Gating every variant matters. As a check, I set the chunk size to 40 words: `vector` stayed
-above its floors, but the gate failed on fts (recall@10 0.977 → 0.750), hybrid and
-hybrid_rerank. A main-variant-only gate would have let that through.
+Gating every variant matters. As a check (on the previous golden-set revision), I set the chunk
+size to 40 words: `vector` stayed above its floors, but the gate failed on fts (recall@10
+0.977 → 0.750), hybrid and hybrid_rerank. A main-variant-only gate would have let that through.
 
 Re-ingesting the fixture from scratch reproduced identical metrics (the HNSW build and ONNX
 inference were deterministic in my runs). The 0.03 tolerance absorbs one question flipping on
-the 44-question fixture.
+the 45-question fixture.
 
 ## Golden set
 
@@ -176,14 +176,20 @@ the 44-question fixture.
 | unanswerable | 6 | realistic near-misses the corpus does not answer (expected: no good source) |
 
 Each item has `expected_pages`, `expected_sections`, a short `reference_answer`, and `notes`
-(including how its uniqueness was checked). Of the 64 answerable items, 44 are answerable
+(including how its uniqueness was checked). Of the 64 answerable items, 45 are answerable
 from the fixture pages; the rest need the full corpus.
 
 **How it was written:** with AI assistance (Claude), by reading the cleaned pages and grepping
 the whole corpus so each fact is answered by the listed page(s) and not elsewhere. Automated
 checks: schema, page existence against the pinned manifest (`data/corpus_pages.txt`), and
-consistency per type. A sample of facts was cross-checked against the source text. It is a
-small, single-author set, so expect a few debatable items (see `notes`).
+consistency per type. A sample of facts was cross-checked against the source text.
+
+The items flagged in review were revised: q043 and q063 (weak multi-hop, one page nearly
+answered them) were replaced by questions that need two pages, each half verified by grep to
+live on only one of them; q021 was reworded to rely only on statements the docs make explicitly;
+q023 and q055 were re-checked by grep, and no other page contains their answer, so their
+expected pages are unchanged (notes record the evidence). It is still a small set, so some
+items remain debatable (see `notes`).
 
 ## Design decisions and trade-offs
 
